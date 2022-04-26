@@ -11,19 +11,6 @@
 **Como** Aluno\
 **Desejo** ser notificado do recebimento de moedas\
 **Para** saber quando e quantas moedas recebi\
-## S04: Resgatar Vantagens# SISTEMA DE MOEDA ESTUDANTIL
-## S01: Fazer Cadastro
-**Como** Aluno e Parceiro\
-**Desejo** fazer cadastro\
-**Para** que seja possível acessar o sistema\
-## S02: Consultar Extrato como aluno
-**Como** Professor e Aluno\
-**Desejo** visualizar meu extrato de moedas\
-**Para** poder saber quantas moedas tenho e o que posso fazer com elas\
-## S03: Notificar aluno do recebimento de moedas
-**Como** Aluno\
-**Desejo** ser notificado do recebimento de moedas\
-**Para** saber quando e quantas moedas recebi\
 ## S04: Resgatar Vantagens
 **Como** Aluno\
 **Desejo** resgatar vantagens\
