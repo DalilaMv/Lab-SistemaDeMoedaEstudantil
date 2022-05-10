@@ -4,7 +4,7 @@ from django.db import models
         
 class Empresa(models.Model):
     nome = models.CharField(max_length=300)
-    cnpj = models.CharField(max_length=11, unique=True)
+    cnpj = models.CharField(max_length=12, unique=True)
     
     class Meta:
         db_table = 'empresa'

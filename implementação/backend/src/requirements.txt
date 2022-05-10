@@ -1,0 +1,7 @@
+Django==3.0.8
+django-cors-headers==3.4.0
+djangorestframework==3.11.0
+djangorestframework-simplejwt==4.3.0
+django-filter==2.4.0
+django-auto-prefetching==0.1.8
+requests==2.26.0
