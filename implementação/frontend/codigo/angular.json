@@ -92,9 +92,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           }
         },
         "lint": {
@@ -123,6 +128,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "codigo"
+    }
+  },
+  "defaultProject": "codigo",
+  "cli": {
+    "analytics": "d351118d-019a-4241-b5ce-b6440f6fe97c"
+  }
 }

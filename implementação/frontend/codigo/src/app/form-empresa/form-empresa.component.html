@@ -1,0 +1,23 @@
+<form [formGroup]="PessoaForm" class="d-flex justify-content-center">
+    <div>
+
+            <div class="mb-3">
+                <label class="me-4" for="user">Usuário: </label>
+                <input type="text" formControlName="user" name="user">
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" formControlName="senha" name="senha">
+            </div>
+        <div class="mb-3">
+            <label class="me-4" for="nome">Nome: </label>
+            <input type="text" formControlName="nome" name="nome">
+        </div>
+        <div class="mb-3">
+            <label class="me-4" for="cnpj">CNPJ: </label>
+            <input type="text" formControlName="cnpj" name="cnpj">
+        </div>
+        <button (click)="Enviar()" type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+</form>
