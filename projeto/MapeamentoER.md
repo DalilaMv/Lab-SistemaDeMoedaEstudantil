@@ -1,9 +1,9 @@
 # Mapeamento ER
 
-**Aluno**(codUsuario, senha, CPF, nome, instituicao, RG, curso, saldo)
+**Aluno**(<ins>codUsuario</ins>, senha, CPF, nome, instituicao, RG, curso, saldo)
 
-**Professor**(codUsuario, senha, CPF, nome, instituicao, deptoVinculado, saldo)
+**Professor**(<ins>codUsuario</ins>, senha, CPF, nome, instituicao, deptoVinculado, saldo)
 
-**Empresa**(codUsuario, senha, CNPJ, nomeEmpresa, vantagensOferecidas)
+**Empresa**(<ins>codUsuario</ins>, senha, CNPJ, nomeEmpresa, vantagensOferecidas)
 
-**Departamento**(codDepto, nomeDepto)
+**Departamento**(<ins>codDepto</ins>, nomeDepto)
