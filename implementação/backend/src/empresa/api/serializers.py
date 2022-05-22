@@ -7,5 +7,13 @@ class EmpresaSerializer(ModelSerializer):
     class Meta:
         model = Empresa
         fields = '__all__'
+        
+
+class VantagemSerializer(ModelSerializer):
+
+    class Meta:
+        model = Vantagem
+        fields = '__all__'
+
 
 
