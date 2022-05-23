@@ -32,4 +32,23 @@ class AlunoViewSet(ModelViewSet):
 
         return Response("sucesso")
 
+class ProfessorViewSet(ModelViewSet):
+    serializer_class = ProfessorViewSet
+    querySet = Professor.objects.all()
+    pagination_class = None
 
+    def list(self, request, *args, **kwargs):
+        query_professor = Professor.objects.select_related('pessoa_id').values('id','curso','rg','pessoa__nome','pessoa__cpf','pessoa__instituicao__nome')
+        return Response(query_professor)
+    
+    def create(self, request, *args, **kwargs):
+        user = User.objects.create(username=request.data["username"],
+                                password=request.data["password"])
+        pessoa = Pessoa.objects.create(nome=request.data["nome"],
+                                    instituicao_id=request.data["instituicao"],
+                                    cpf=request.data["cpf"], 
+                                    user_id=user.id)
+        professor = Professor.objects.create(pessoa_id=pessoa.id,
+                        departamento=request.data["departamento"])
+
+        return Response("sucesso")

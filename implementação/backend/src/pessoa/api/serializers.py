@@ -14,3 +14,9 @@ class AlunoSerializer(ModelSerializer):
         model = Aluno
         fields = '__all__'
 
+class ProfessorSerializer(ModelSerializer):
+
+    class Meta:
+        model = Professor
+        fields = '__all__'
+

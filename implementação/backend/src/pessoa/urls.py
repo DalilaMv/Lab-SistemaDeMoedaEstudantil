@@ -5,6 +5,7 @@ from django.urls import path
 
 router = DefaultRouter()
 router.register('alunos', AlunoViewSet)
+router.register('professores', ProfessorViewSet)
 
 urlpatterns = []
 urlpatterns += router.urls
