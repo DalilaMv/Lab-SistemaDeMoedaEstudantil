@@ -1,11 +1,10 @@
 from django.http import JsonResponse
 from rest_framework.viewsets import ModelViewSet
-from implementação.backend.src.empresa.models import Empresa
+from empresa.models import Empresa
 from pessoa.models import *
 from pessoa.api.serializers import *
 from rest_framework.decorators import action
 from rest_framework.response import Response
-
 
 class PessoaViewSet(ModelViewSet):
     serializer_class = PessoaSerializer

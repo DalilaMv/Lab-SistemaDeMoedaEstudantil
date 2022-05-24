@@ -4,10 +4,10 @@ from django.urls import path
 
 
 router = DefaultRouter()
-router.register('alunos', AlunoViewSet)
-router.register('professores', ProfessorViewSet)
-router.register('extrato', ExtratoViewSet)
-router.register('pessoas', PessoaViewSet)
+router.register('alunos', AlunoViewSet, basename='alunos')
+router.register('professores', ProfessorViewSet, basename='professores')
+router.register('extrato', ExtratoViewSet, basename='extrato')
+router.register('pessoas', PessoaViewSet, basename='pessoas')
 
 urlpatterns = []
 urlpatterns += router.urls
