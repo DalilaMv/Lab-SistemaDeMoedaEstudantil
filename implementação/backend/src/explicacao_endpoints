@@ -1,0 +1,64 @@
+
+TABELA PESSOA:
+id
+nome
+instituicao (foreign key para a tabela de INSTITUICAO)
+cpf 
+user  (foreign key para a tabela de USER)
+saldo 
+
+====
+
+TABELA ALUNO:
+id
+pessoa (foreign key para a tabela de PESSOA)
+rg
+curso 
+
+Requisições para get post delete e patch de alunos são feitas na url /api/pessoa/alunos/
+
+====
+
+TABELA PROFESSOR:
+id
+pessoa (foreign key para a tabela de PESSOA)
+departamento (foreign key para a tabela de DEPARTAMENTO)
+
+Requisições para get post delete e patch de professores são feitas na url /api/pessoa/professores/
+
+====
+
+TABELA EXTRATO:
+id
+valor_enviado 
+destinatario (foreign key para USER)
+remetente (foreign key para USER)
+
+Requisições para get post delete e patch de professores são feitas na url /api/pessoa/extrato/
+
+
+para fazer um post de transação é necessário enviar o id do aluno/professor que está recebendo o valor da seguinte forma: (exemplo)
+	{
+		destinatario: 1,
+		destinatario_tipo: 'aluno',
+		valor_enviado: 1000
+	
+	}
+	
+OBS.: O destinatário_tipo pode ser 'aluno' ou 'professor'
+Ao mesmo tempo que é feito um POST em extrato para cadastrar uma transação é necessário também fazer um POST 
+para atualizar o saldo do aluno ou professor, no caso é nesseário enviar a requisição para atualizar o campo 'saldo' 
+na tabela pessoa
+a requisicao deve ser feita para a seguinte url: /api/pessoa/pessoas/update_saldo
+enviando somente o dado:
+(exemplo)
+	{
+		saldo: 1233
+	}
+OBS.: O CALCULO DO SALDO DEVE SER FEITO NO FRONT PARA QUE O NOVO SALDO JA SEJA ATUALIZADO CORRETAMENTE.
+
+Para saber o saldo do usuario LOGADO é só fazer uma requisição GET para a url: /api/pessoa/pessoas/get_saldo
+
+
+
+
