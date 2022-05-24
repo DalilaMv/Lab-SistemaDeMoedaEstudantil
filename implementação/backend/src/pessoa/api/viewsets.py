@@ -33,7 +33,7 @@ class AlunoViewSet(ModelViewSet):
         return Response("sucesso")
 
 class ProfessorViewSet(ModelViewSet):
-    serializer_class = ProfessorViewSet
+    serializer_class = ProfessorSerializer
     querySet = Professor.objects.all()
     pagination_class = None
 
