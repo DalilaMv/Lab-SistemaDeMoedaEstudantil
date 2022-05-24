@@ -5,6 +5,7 @@ from pessoa.models import *
 from pessoa.api.serializers import *
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.db.models import Q
 
 
 class PessoaViewSet(ModelViewSet):
@@ -72,6 +73,19 @@ class ExtratoViewSet(ModelViewSet):
     serializer_class = ExtratoSerializer
     querySet = Extrato.objects.all()
     pagination_class = None
+
+    def list(self, request, *args, **kwargs):
+        user_remetente = self.request.user.id
+        lista_extrato = Extrato.objects.filter(Q(remetente = user_remetente) | Q(destinatario = user_remetente))
+        # user_destinatario = [" "]
+        # valor_extrato = [0]
+        # for x in lista_extrato:
+        #     user_destinatario.append(x.destinatario)
+        #     valor_extrato.append(x.valor_enviado)
+
+        # objExtrato = [user_remetente, user_destinatario, valor_extrato]
+
+        return Response(lista_extrato)
     
     # testar se funciona
     def create(self, request, *args, **kwargs):
