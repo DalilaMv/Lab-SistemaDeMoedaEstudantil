@@ -20,7 +20,7 @@ class VantagemViewSet(ModelViewSet):
         user = self.request.user.id
         empresa_logada = Empresa.objects.filter(user=user)
         vantagem = Vantagem.objects.create(descricao=request.data["descricao"], 
-                                    empresa_id=empresa_logada.id).save()
+                                    empresa_id=empresa_logada.id)
         return Response(vantagem)
 
 class EmpresaViewSet(ModelViewSet):
@@ -31,10 +31,10 @@ class EmpresaViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
     
         user = User.objects.create(username=request.data["username"],
-                                password=request.data["password"]).save()
+                                password=request.data["password"])
         
         empresa = Empresa.objects.create(nome=request.data["nome"],
                                     cnpj=request.data["cnpj"], 
-                                    user_id=user.id).save()
+                                    user_id=user.id)
     
         return Response(empresa)

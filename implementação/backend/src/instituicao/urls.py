@@ -4,6 +4,6 @@ from django.urls import path
 
 
 router = DefaultRouter()
-router.register('instituicao', InstituicaoViewSet)
+router.register('instituicao', InstituicaoViewSet, basename='instituicao')
 urlpatterns = []
 urlpatterns += router.urls
