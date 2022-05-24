@@ -20,3 +20,9 @@ class ProfessorSerializer(ModelSerializer):
         model = Professor
         fields = '__all__'
 
+class ExtratoSerializer(ModelSerializer):
+
+    class Meta:
+        model = Extrato
+        fields = '__all__'
+

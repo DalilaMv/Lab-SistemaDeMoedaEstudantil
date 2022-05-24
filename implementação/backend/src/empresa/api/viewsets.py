@@ -9,16 +9,14 @@ class VantagemViewSet(ModelViewSet):
     queryset = Vantagem.objects.all()
     pagination_class = None
     
-    @action(methods=['get'], detail=False)
-    def get(self, request, *args, **kwargs):
+    def list(self, request, *args, **kwargs):
         user = self.request.user.id
         empresa_logada = Empresa.objects.filter(user=user)
         vantagem = Vantagem.objects.filter(empresa_id=empresa_logada.id)
         serializer = VantagemSerializer(vantagem, many=True)
         return Response(serializer.data)
     
-    @action(methods=['post'], detail=False)
-    def save(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
         user = self.request.user.id
         empresa_logada = Empresa.objects.filter(user=user)
         vantagem = Vantagem.objects.create(descricao=request.data["descricao"], 
@@ -30,8 +28,7 @@ class EmpresaViewSet(ModelViewSet):
     queryset = Empresa.objects.all()
     pagination_class = None
     
-    @action(methods=['post'], detail=False)
-    def save(self, request, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
     
         user = User.objects.create(username=request.data["username"],
                                 password=request.data["password"]).save()
