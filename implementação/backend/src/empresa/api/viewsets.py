@@ -11,14 +11,14 @@ class VantagemViewSet(ModelViewSet):
     
     def list(self, request, *args, **kwargs):
         user = self.request.user.id
-        empresa_logada = Empresa.objects.filter(user=user)
+        empresa_logada = Empresa.objects.get(user=user)
         vantagem = Vantagem.objects.filter(empresa_id=empresa_logada.id)
         serializer = VantagemSerializer(vantagem, many=True)
         return Response(serializer.data)
     
     def create(self, request, *args, **kwargs):
         user = self.request.user.id
-        empresa_logada = Empresa.objects.filter(user=user)
+        empresa_logada = Empresa.objects.get(user=user)
         vantagem = Vantagem.objects.create(descricao=request.data["descricao"], 
                                     empresa_id=empresa_logada.id)
         return Response(vantagem)
