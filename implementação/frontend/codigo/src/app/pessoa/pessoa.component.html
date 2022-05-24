@@ -1,19 +1,19 @@
-<button (click)="Adicionar()">Cadastrar Nova Pessoa</button>
+<app-header></app-header>
+<button class="mt-3 add-button" (click)="Adicionar()"><img src="assets/img/mais.png"></button>
 
 <div class="d-flex justify-content-center">
-     
+
     <div>
-        <h1>Pessoas Cadastradas</h1>  
-        <li *ngFor= "let pessoa of pessoas" class="list-group-item d-flex justify-content-between align-items-start">
+        <h1>Pessoas Cadastradas</h1>
+        <li *ngFor="let pessoa of pessoas" class="list-group-item d-flex justify-content-between align-items-start">
             <div class="ms-2 me-auto">
-                <div class="fw-bold">{{pessoa.nome}}</div>
+                <div class="fw-bold">{{pessoa.pessoa__nome}}</div>
                 <p>CPF: {{pessoa.pessoa__cpf}}- RG:{{pessoa.rg}}</p>
                 <p>{{pessoa.pessoa__instituicao__nome}}-{{pessoa.curso}}</p>
-                <button (click)="Editar()">Editar</button>
-                <button (click)="Excluir(pessoa.id)">Excluir</button>
+                <button class="button me-3" (click)="Editar()">Editar</button>
+                <button class="button" (click)="Excluir(pessoa.id)">Excluir</button>
             </div>
-        </li> 
+        </li>
     </div>
-    
-</div>
 
+</div>

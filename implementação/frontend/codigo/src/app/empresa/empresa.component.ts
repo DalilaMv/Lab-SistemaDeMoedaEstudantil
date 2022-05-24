@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EmpresaService } from '../empresa.service';
+import { EmpresaService } from '../services/empresa.service';
 
 @Component({
   selector: 'app-empresa',
@@ -10,16 +10,16 @@ import { EmpresaService } from '../empresa.service';
 })
 export class EmpresaComponent implements OnInit {
 
-  pessoas: any;
+  empresas: any;
   router: Router;
 
-  constructor(private pessoaService: EmpresaService, router: Router) { this.router = router;}
+  constructor(private empresaService: EmpresaService, router: Router) { this.router = router;}
   
 
   ngOnInit(): void {
-    this.pessoaService.getAll().subscribe(
+    this.empresaService.getAll().subscribe(
       result => {
-        this.pessoas = result;
+        this.empresas = result;
       }
     );
     
@@ -27,9 +27,9 @@ export class EmpresaComponent implements OnInit {
   Adicionar(): void{
     this.router.navigate(['/empresa/criar']);
   }
-  Excluir(pessoa): void {
-    console.log(pessoa);
-    this.pessoaService.remove(pessoa).subscribe(result => location.reload());
+  Excluir(empresa): void {
+
+    this.empresaService.remove(empresa).subscribe(result => location.reload());
     
   }
 

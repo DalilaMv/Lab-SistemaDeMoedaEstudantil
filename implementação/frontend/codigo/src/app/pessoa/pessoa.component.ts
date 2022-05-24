@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PessoaService } from '../pessoa.service'
+import { PessoaService } from '../services/pessoa.service';
 
 @Component({
   selector: 'app-pessoa',
@@ -13,8 +13,7 @@ export class PessoaComponent implements OnInit {
   pessoas: any;
   router: Router;
   @Output() edit = new EventEmitter<any>();
-  constructor(private pessoaService: PessoaService, router: Router) { this.router = router;}
-  
+  constructor(private pessoaService: PessoaService, router: Router) { this.router = router; }
 
   ngOnInit(): void {
     this.pessoaService.getAll().subscribe(
@@ -22,7 +21,6 @@ export class PessoaComponent implements OnInit {
         this.pessoas = result;
       }
     );
-    
   }
   Adicionar(): void{
     this.router.navigate(['/pessoa/criar']);
@@ -30,9 +28,8 @@ export class PessoaComponent implements OnInit {
   Excluir(pessoa): void {
     console.log(pessoa);
     this.pessoaService.remove(pessoa).subscribe(result => location.reload());
-    
   }
-  Editar(){
+  Editar(): void{
     this.edit.emit(false);
   }
 
