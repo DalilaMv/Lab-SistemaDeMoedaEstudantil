@@ -1,0 +1,10 @@
+<div class="d-flex">
+    <div *ngFor="let vantagem of vantagens"  class="card me-3">
+        <img src={{vantagem.foto}} class="card-img-top" alt="imagem">
+        <div class="card-body">
+            <h2 class="card-title">{{vantagem.nome}}</h2>
+            <p class="card-text">{{vantagem.descricao}}</p>
+            <a href="#" class="btn btn-primary">Comprar</a>
+        </div>
+    </div>
+</div>

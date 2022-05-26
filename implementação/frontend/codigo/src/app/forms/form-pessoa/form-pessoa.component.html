@@ -1,0 +1,40 @@
+<div class="d-flex flex-column align-items-center justify-content-center mt-4">
+    <h1>Cadastrar Pessoa</h1>
+    <form [formGroup]="PessoaForm">
+        <div>
+            <div class="d-flex justify-content-between mb-3">
+                <label class="p-1 me-4" for="user">Usuário: </label>
+                <input type="text" formControlName="user" name="user">
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <label for="senha" class="p-1">Senha: </label>
+                <input type="password" formControlName="senha" name="senha">
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <label class="p-1 me-4" for="nome">Nome: </label>
+                <input type="text" formControlName="nome" name="nome">
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <label class="p-1 me-4" for="cpf">CPF: </label>
+                <input type="text" formControlName="cpf" name="cpf">
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <label class="p-1 me-4" for="rg">RG: </label>
+                <input type="text" formControlName="rg" name="rg">
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <label class="p-1 me-4" for="instituicao">Instituicao: </label>
+                <select formControlName="instituicao" name="instituicao">
+                    <option *ngFor="let instituicao of instituicoes" value="{{instituicao.id}}">{{instituicao.nome}}
+                    </option>
+                </select>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <label class="p-1 me-4" for="curso">Curso: </label>
+                <input type="text" formControlName="curso" name="curso">
+            </div>
+            <button (click)="Enviar()" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+    </form>
+</div>

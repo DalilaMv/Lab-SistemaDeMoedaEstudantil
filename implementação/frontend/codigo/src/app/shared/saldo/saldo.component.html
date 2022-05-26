@@ -1,0 +1,9 @@
+<app-header></app-header>
+<div class="d-flex justify-content-between me-5 mt-3">
+    <h3>Saldo: {{saldo}}</h3>
+    <button (click) = "mostrarExtrato()">Ver extrato</button>
+</div>
+
+<app-beneficios *ngIf = "tipo == 'aluno'"></app-beneficios>
+<app-enviar-moeda *ngIf = "tipo == 'professor'"></app-enviar-moeda>
+

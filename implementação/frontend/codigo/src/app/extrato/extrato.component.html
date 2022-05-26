@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Extrato</h1>
+<div mat-dialog-content>
+    <div *ngFor="let linha of linhas" class="d-flex">
+        <h3 class="me-1">Remetente:</h3> <h3 class="me-3">{{linha.remetente__pessoa__nome}}</h3>
+        <h3 class="me-1">Destinatário: </h3> <h3 class="me-3">{{linha.destinatario__pessoa__nome}}</h3>
+        <h3 class="me-1">Valor Enviado: </h3> <h3 class="me-3">{{linha.valor_enviado}}</h3>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Fechar</button>
+</div>
