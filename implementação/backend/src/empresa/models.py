@@ -12,6 +12,8 @@ class Empresa(models.Model):
     
 class Vantagem(models.Model):
     descricao = models.TextField()
+    img = models.TextField(blank=True, null=True)
+    titulo = models.CharField(max_length=200, null=True, blank=True)
     empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE)
     
     class Meta:

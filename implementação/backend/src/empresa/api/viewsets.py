@@ -18,23 +18,25 @@ class VantagemViewSet(ModelViewSet):
     
     def create(self, request, *args, **kwargs):
         user = self.request.user.id
-        empresa_logada = Empresa.objects.get(user=user)
+        empresa_logada = Empresa.objects.get(user_id=user)
         vantagem = Vantagem.objects.create(descricao=request.data["descricao"], 
+                                    img=request.data["img"],
+                                    titulo=request.data["titulo"],
                                     empresa_id=empresa_logada.id)
-        return Response(vantagem)
+        return Response("sucesso")
 
 class EmpresaViewSet(ModelViewSet):
     serializer_class = EmpresaSerializer
     queryset = Empresa.objects.all()
     pagination_class = None
     
-    def create(self, request, *args, **kwargs):
+    # def create(self, request, *args, **kwargs):
     
-        user = User.objects.create(username=request.data["username"],
-                                password=request.data["password"])
+    #     user = User.objects.create(username=request.data["username"],
+    #                             password=request.data["password"])
         
-        empresa = Empresa.objects.create(nome=request.data["nome"],
-                                    cnpj=request.data["cnpj"], 
-                                    user_id=user.id)
+    #     empresa = Empresa.objects.create(nome=request.data["nome"],
+    #                                 cnpj=request.data["cnpj"], 
+    #                                 user_id=user.id)
     
-        return Response(empresa)
+        # return Response(empresa)

@@ -14,14 +14,24 @@ class PessoaViewSet(ModelViewSet):
     
     @action(methods=['post'], detail=False)
     def update_saldo(self, request, pk=None):
-        user = self.request.user.id
-        Pessoa.objects.filter(user_id=user).update(saldo=request.data["saldo"])
+
+        id_destinatario = request.data["destinatario"]
+        if request.data["tipo_destinatario"]=="aluno":
+            dest = Aluno.objects.get(id=id_destinatario)
+        else:
+            dest = Professor.objects.get(id=id_destinatario)
+        
+
+        Pessoa.objects.filter(id=dest.pessoa_id).update(saldo=request.data["saldo_destinatario"])
+        id_rem = self.request.user.id
+
+        Pessoa.objects.filter(user_id=id_rem).update(saldo=request.data["saldo_remetente"])
         return JsonResponse('Success', safe=False)
         
     @action(methods=['get'], detail=False)
     def get_saldo(self, request, pk=None):
         user = self.request.user.id
-        saldo_user = Pessoa.objects.filter(user_id=user).select_related('saldo')
+        saldo_user = Pessoa.objects.get(user_id=user).saldo
         return JsonResponse(saldo_user, safe=False)
 
 class AlunoViewSet(ModelViewSet):
@@ -30,7 +40,7 @@ class AlunoViewSet(ModelViewSet):
     pagination_class = None
     
     def list(self, request, *args, **kwargs):
-        query_aluno = Aluno.objects.select_related('pessoa_id').values('id','curso','rg','pessoa__nome','pessoa__cpf','pessoa__instituicao__nome')
+        query_aluno = Aluno.objects.select_related('pessoa_id').values('id','curso','rg','pessoa__nome','pessoa__cpf','pessoa__instituicao__nome', 'pessoa__saldo')
         return Response(query_aluno)
     
     def create(self, request, *args, **kwargs):
@@ -52,20 +62,20 @@ class ProfessorViewSet(ModelViewSet):
     pagination_class = None
 
     def list(self, request, *args, **kwargs):
-        query_professor = Professor.objects.select_related('pessoa_id').values('id','curso','rg','pessoa__nome','pessoa__cpf','pessoa__instituicao__nome')
+        query_professor = Professor.objects.select_related('pessoa_id').values('id','departamento','pessoa__nome','pessoa__cpf','pessoa__instituicao__nome')
         return Response(query_professor)
     
-    def create(self, request, *args, **kwargs):
-        user = User.objects.create(username=request.data["username"],
-                                password=request.data["password"])
-        pessoa = Pessoa.objects.create(nome=request.data["nome"],
-                                    instituicao_id=request.data["instituicao"],
-                                    cpf=request.data["cpf"], 
-                                    user_id=user.id)
-        Professor.objects.create(pessoa_id=pessoa.id,
-                        departamento=request.data["departamento"])
+    # def create(self, request, *args, **kwargs):
+    #     user = User.objects.create(username=request.data["username"],
+    #                             password=request.data["password"])
+    #     pessoa = Pessoa.objects.create(nome=request.data["nome"],
+    #                                 instituicao_id=request.data["instituicao"],
+    #                                 cpf=request.data["cpf"], 
+    #                                 user_id=user.id)
+    #     Professor.objects.create(pessoa_id=pessoa.id,
+    #                     departamento=request.data["departamento"])
 
-        return Response("sucesso")
+    #     return Response("sucesso")
     
     
 class ExtratoViewSet(ModelViewSet):
@@ -77,7 +87,8 @@ class ExtratoViewSet(ModelViewSet):
         user_remetente = self.request.user.id
         lista_extrato = Extrato.objects.filter(Q(remetente = user_remetente) | Q(destinatario = user_remetente))
 
-        return Response(lista_extrato)
+        query = lista_extrato.select_related('destinatario_id','remetente_id').values('destinatario__pessoa__nome','remetente__pessoa__nome','valor_enviado')
+        return Response(query)
     
     # testar se funciona
     def create(self, request, *args, **kwargs):
@@ -92,7 +103,7 @@ class ExtratoViewSet(ModelViewSet):
 
         extrato = Extrato.objects.create(valor_enviado=request.data["valor_enviado"],
                                         destinatario_id=id_destinatario,
-                                        remetente=user_remetente)
+                                        remetente_id=user_remetente)
     
 
         return Response("sucesso")

@@ -8,3 +8,7 @@ class InstituicaoViewSet(ModelViewSet):
     queryset = Instituicao.objects.all()
     pagination_class = None
     
+class DepartamentoViewSet(ModelViewSet):
+    serializer_class = DepartamentoSerializer
+    queryset = Departamento.objects.all()
+    pagination_class = None

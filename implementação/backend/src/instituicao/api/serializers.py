@@ -9,3 +9,9 @@ class InstituicaoSerializer(ModelSerializer):
         fields = '__all__'
 
 
+
+class DepartamentoSerializer(ModelSerializer):
+
+    class Meta:
+        model = Departamento
+        fields = '__all__'
