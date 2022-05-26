@@ -23,7 +23,11 @@ export class VantagemService {
     return this.httpClient.post<any>(URL, body, {headers});
   }
   getAll() {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + this.token
+    });
     const URL = `${environment.BASE_URL}/api/empresa/vantagens/`;
-    return this.httpClient.get<any>(URL);
+    return this.httpClient.get<any>(URL, {headers});
   }
 }
