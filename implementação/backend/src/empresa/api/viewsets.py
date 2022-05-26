@@ -11,9 +11,14 @@ class VantagemViewSet(ModelViewSet):
     
     def list(self, request, *args, **kwargs):
         user = self.request.user.id
-        empresa_logada = Empresa.objects.get(user=user)
-        vantagem = Vantagem.objects.filter(empresa_id=empresa_logada.id)
-        serializer = VantagemSerializer(vantagem, many=True)
+        empresa_user_list = [d.user_id for d in Empresa.objects.all()]
+        if user in empresa_user_list:
+            empresa_logada = Empresa.objects.get(user=user)
+            vantagem = Vantagem.objects.filter(empresa_id=empresa_logada.id)
+            serializer = VantagemSerializer(vantagem, many=True)
+        else:
+            vantagem = Vantagem.objects.all()
+            serializer = VantagemSerializer(vantagem, many=True)
         return Response(serializer.data)
     
     def create(self, request, *args, **kwargs):
