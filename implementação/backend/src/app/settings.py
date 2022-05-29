@@ -146,3 +146,12 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': False,
     'SIGNING_KEY': SECRET_KEY,
 }
+
+EMAIL_ADDRESS = 'vadnotify@gmail.com'
+
+EMAIL_PASSWORD = 'Dalila123'
+
+
+#email de teste para aluno
+# alunotestedalila@gmail.com 
+# Dalila123
