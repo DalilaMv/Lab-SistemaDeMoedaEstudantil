@@ -19,6 +19,7 @@ export class EmpresaService {
       password: content.senha,
       nome: content.nome,
       cnpj: content.cnpj,
+      email: content.email
     };
 
     return this.httpClient.post<any>(URL, body, {headers});

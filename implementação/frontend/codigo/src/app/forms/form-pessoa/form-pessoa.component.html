@@ -23,6 +23,10 @@
                 <input type="text" formControlName="rg" name="rg">
             </div>
             <div class="d-flex justify-content-between mb-3">
+              <label class="p-1 me-4" for="email">E-mail </label>
+              <input type="email" formControlName="email" name="email">
+          </div>
+            <div class="d-flex justify-content-between mb-3">
                 <label class="p-1 me-4" for="instituicao">Instituicao: </label>
                 <select formControlName="instituicao" name="instituicao">
                     <option *ngFor="let instituicao of instituicoes" value="{{instituicao.id}}">{{instituicao.nome}}

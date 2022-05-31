@@ -17,12 +17,13 @@ export class PessoaService {
       rg: content.rg,
       cpf: content.cpf,
       instituicao: content.instituicao,
-      curso: content.curso
+      curso: content.curso,
+      email: content.email
     };
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.token
-    });  
+    });
     return this.httpClient.post<any>(URL, body, {headers});
   }
 
@@ -30,7 +31,7 @@ export class PessoaService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.token
-    });   
+    });
     const URL = `${environment.BASE_URL}/api/pessoa/alunos/`;
     return this.httpClient.get<any>(URL, {headers});
   }
@@ -38,7 +39,7 @@ export class PessoaService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.token
-    }); 
+    });
     const URL = `${environment.BASE_URL}/api/pessoa/alunos/` + content.id;
     const body = content;
 
@@ -48,7 +49,7 @@ export class PessoaService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.token
-    }); 
+    });
     const URL = `${environment.BASE_URL}/api/pessoa/alunos/` + content;
     return this.httpClient.delete<any>(URL, {headers});
   }
@@ -56,7 +57,7 @@ export class PessoaService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.token
-    }); 
+    });
     const URL = `${environment.BASE_URL}/api/instituicao/instituicao/`;
     return this.httpClient.get<any>(URL, {headers});
   }
@@ -64,7 +65,7 @@ export class PessoaService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.token
-    }); 
+    });
     const URL = `${environment.BASE_URL}/api/pessoa/pessoas/update_saldo/`;
     const body = {
       destinatario: destinatario,
@@ -73,22 +74,22 @@ export class PessoaService {
       saldo_remetente: saldo_rem
     };
 
-    return this.httpClient.post<any>(URL, body, {headers});  
+    return this.httpClient.post<any>(URL, body, {headers});
   }
   getSaldo(){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.token
-    }); 
+    });
     const URL = `${environment.BASE_URL}/api/pessoa/pessoas/get_saldo/`;
 
-    return this.httpClient.get<any>(URL, {headers});  
+    return this.httpClient.get<any>(URL, {headers});
   }
   updateExtrato(destinatario, tipo, valor){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.token
-    }); 
+    });
     const URL = `${environment.BASE_URL}/api/pessoa/extrato/`;
     const body = {
       destinatario: destinatario,
@@ -96,7 +97,7 @@ export class PessoaService {
 		  valor_enviado: valor
     };
 
-    return this.httpClient.post<any>(URL, body, {headers});  
+    return this.httpClient.post<any>(URL, body, {headers});
   }
   getExtrato(){
     const headers = new HttpHeaders({

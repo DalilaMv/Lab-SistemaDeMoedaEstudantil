@@ -18,7 +18,8 @@ export class FormPessoaComponent implements OnInit {
     cpf: new FormControl(null),
     rg: new FormControl(null),
     instituicao: new FormControl(null),
-    curso: new FormControl(null)
+    curso: new FormControl(null),
+    email: new FormControl(null)
   });
   ngOnInit(): void {
     this.pessoaService.getInstituicoes().subscribe(
@@ -35,7 +36,8 @@ export class FormPessoaComponent implements OnInit {
       rg: this.PessoaForm.value.rg,
       cpf: this.PessoaForm.value.cpf,
       instituicao: this.PessoaForm.value.instituicao,
-      curso: this.PessoaForm.value.curso
+      curso: this.PessoaForm.value.curso,
+      email: this.PessoaForm.value.email
     };
     this.pessoaService.create(this.pessoa).subscribe();
   }

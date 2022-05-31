@@ -18,6 +18,7 @@ export class FormEmpresaComponent implements OnInit {
     senha: new FormControl(null),
     nome: new FormControl(null),
     cnpj: new FormControl(null),
+    email: new FormControl(null)
   });
   ngOnInit(): void {
 
@@ -28,6 +29,7 @@ export class FormEmpresaComponent implements OnInit {
       senha: this.EmpresaForm.value.senha,
       nome: this.EmpresaForm.value.nome,
       cnpj: this.EmpresaForm.value.cnpj,
+      email: this.EmpresaForm.value.email
     };
     this.empresaService.create(this.empresa).subscribe();
   }
