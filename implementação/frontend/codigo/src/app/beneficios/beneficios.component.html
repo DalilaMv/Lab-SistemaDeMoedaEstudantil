@@ -4,7 +4,8 @@
         <div class="card-body">
             <h2 class="card-title">{{vantagem.nome}}</h2>
             <p class="card-text">{{vantagem.descricao}}</p>
-            <a href="#" class="btn btn-primary">Comprar</a>
+            <p class="card-text">{{vantagem.preco}}</p>
+            <button (click)="Comprar(vantagem)" class="btn btn-primary">Comprar</button>
         </div>
     </div>
 </div>

@@ -19,6 +19,7 @@ export class SaldoComponent implements OnInit {
         this.saldo = result;
       }
     );
+    localStorage.setItem('saldo', this.saldo);
   }
   mostrarExtrato(): void{
     const dialogRef = this.dialog.open(ExtratoComponent, {

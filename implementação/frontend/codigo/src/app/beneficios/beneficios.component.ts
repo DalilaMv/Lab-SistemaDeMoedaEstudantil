@@ -8,12 +8,16 @@ import { VantagemService } from '../services/vantagem.service';
 })
 export class BeneficiosComponent implements OnInit {
   vantagens: any;
+  saldo: string;
   constructor(private vantagemService: VantagemService) { }
 
   ngOnInit(): void {
-    this.vantagemService.getAll().subscribe(resp => {this.vantagens = resp
-      console.log(this.vantagens)});
+    this.vantagemService.getAll().subscribe(resp => this.vantagens = resp );
+    this.saldo = localStorage.getItem('saldo');
 
+  }
+  Comprar(vantagem): void{
+    this.vantagemService.buyVantage(this.saldo, vantagem.empresa_id, vantagem.preco, vantagem.id);
   }
 
 }

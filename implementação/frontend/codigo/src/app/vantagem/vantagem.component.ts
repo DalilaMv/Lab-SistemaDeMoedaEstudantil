@@ -14,12 +14,13 @@ export class VantagemComponent implements OnInit {
     imagem: new FormControl(null),
     descricao: new FormControl(null),
     nome: new FormControl(null),
+    preco: new FormControl(null)
   });
   ngOnInit(): void {
   }
   Cadastro(): void {
     console.log('oi');
     this.vantagemService.create(this.VantagemForm.value.nome, this.VantagemForm.value.descricao, 
-    this.VantagemForm.value.imagem).subscribe();
+    this.VantagemForm.value.imagem, this.VantagemForm.value.preco).subscribe();
   }
 }
