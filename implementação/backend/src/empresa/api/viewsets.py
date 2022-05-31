@@ -39,7 +39,8 @@ class EmpresaViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
     
         user = User.objects.create(username=request.data["username"],
-                                password=request.data["password"])
+                                password=request.data["password"],
+                                email=request.data["email"])
         
         empresa = Empresa.objects.create(nome=request.data["nome"],
                                     cnpj=request.data["cnpj"], 

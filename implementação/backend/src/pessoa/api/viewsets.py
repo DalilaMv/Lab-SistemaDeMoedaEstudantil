@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from rest_framework.viewsets import ModelViewSet
 from empresa.models import Empresa
+from app.utils.email_notification import send_email
 from pessoa.models import *
 from pessoa.api.serializers import *
 from rest_framework.decorators import action
@@ -39,13 +40,36 @@ class AlunoViewSet(ModelViewSet):
     queryset = Aluno.objects.all()
     pagination_class = None
     
+    @action(methods=['post'], detail=False)
+    def get_vantagem(self, request, pk=None):
+        aluno_user =  self.request.user
+        #atualiza o saldo do aluno para o novo valor que o front envia
+        Pessoa.objects.filter(id=aluno_user.id).update(saldo=request.data["novo_saldo"])
+        empresa = Empresa.objects.get(id=request.data["empresa"])
+        Extrato.objects.create(valor_enviado=request.data["valor_enviado"],
+                                remetente_id=aluno_user.id,
+                                destinatario_id=empresa.id
+                            )
+        
+        # email para o aluno
+        assunto = 'Código de troca de vantagem'
+        destinatario = aluno_user.email
+        mensagem = 'Olá, para resgatar sua vantagem informe o seguinte código: {}.'.format(request.data["vantagem"])
+        send_email(assunto, destinatario, mensagem)
+        # email para a empresa 
+        destinatario = Pessoa.objects.get(id=empresa.id).email
+        mensagem = 'Olá, o código da sua vantagem é {}, favor confirmar na hora do resgate'.format(request.data['vantagem'])
+        send_email(assunto, destinatario, mensagem)
+        return JsonResponse('Success', safe=False)
+    
     def list(self, request, *args, **kwargs):
         query_aluno = Aluno.objects.select_related('pessoa_id').values('id','curso','rg','pessoa__nome','pessoa__cpf','pessoa__instituicao__nome', 'pessoa__saldo')
         return Response(query_aluno)
     
     def create(self, request, *args, **kwargs):
         user = User.objects.create(username=request.data["username"],
-                                password=request.data["password"])
+                                password=request.data["password"],
+                                email=request.data["email"])
         pessoa = Pessoa.objects.create(nome=request.data["nome"],
                                     instituicao_id=request.data["instituicao"],
                                     cpf=request.data["cpf"], 

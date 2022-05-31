@@ -155,3 +155,7 @@ EMAIL_PASSWORD = 'Dalila123'
 #email de teste para aluno
 # alunotestedalila@gmail.com 
 # Dalila123
+
+#email de teste para prof
+# professortestedalila@gmail.com
+# Dalila123
