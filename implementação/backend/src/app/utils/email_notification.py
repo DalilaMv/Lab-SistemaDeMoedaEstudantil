@@ -10,7 +10,8 @@ def send_email(self, assunto, destinatario, mensagem):
     msg['From'] = settings.EMAIL_ADDRESS
     msg['To'] = destinatario
     msg.set_content(mensagem)
-    
+    print(assunto,destinatario,mensagem)
+
     with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
         smtp.login(settings.EMAIL_ADDRESS, settings.EMAIL_PASSWORD)
         smtp.send_message(msg)

@@ -44,7 +44,7 @@ class AlunoViewSet(ModelViewSet):
     def get_vantagem(self, request, pk=None):
         aluno_user =  self.request.user
         #atualiza o saldo do aluno para o novo valor que o front envia
-        Pessoa.objects.filter(id=aluno_user.id).update(saldo=request.data["novo_saldo"])
+        aluno_p = Pessoa.objects.filter(user_id=aluno_user.id).update(saldo=request.data["novo_saldo"])
         empresa = Empresa.objects.get(id=request.data["empresa"])
         Extrato.objects.create(valor_enviado=request.data["valor_enviado"],
                                 remetente_id=aluno_user.id,
@@ -55,11 +55,12 @@ class AlunoViewSet(ModelViewSet):
         assunto = 'Código de troca de vantagem'
         destinatario = aluno_user.email
         mensagem = 'Olá, para resgatar sua vantagem informe o seguinte código: {}.'.format(request.data["vantagem"])
-        send_email(assunto, destinatario, mensagem)
+        send_email(self, assunto, destinatario, mensagem)
         # email para a empresa 
-        destinatario = Pessoa.objects.get(id=empresa.id).email
+        
+        destinatario = User.objects.get(id=Empresa.objects.get(id=empresa.id).user_id).email
         mensagem = 'Olá, o código da sua vantagem é {}, favor confirmar na hora do resgate'.format(request.data['vantagem'])
-        send_email(assunto, destinatario, mensagem)
+        send_email(self, assunto, destinatario, mensagem)
         return JsonResponse('Success', safe=False)
     
     def list(self, request, *args, **kwargs):
